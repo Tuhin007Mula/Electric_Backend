@@ -29,6 +29,7 @@ app.get("/", (req, res) => {
 let isConnected = false;
 const ensureDBConnection = async () => {
   if (!isConnected) {
+    console.log("✅ MongoDB connected successfully 111111111111");
     try {
       await connectDB();
       isConnected = true;
