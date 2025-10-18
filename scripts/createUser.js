@@ -5,7 +5,7 @@ import User from "../models/user.model.js"; // adjust the path if needed
 //node scripts/createUser.js
 
 // ✅ MongoDB connection
-const mongoURI = "mongodb+srv://User1:user1@records.thxeqbd.mongodb.net/?retryWrites=true&w=majority&appName=Records";
+const mongoURI = "mongodb+srv://User10:User10@electric-data-entry.dbbjcpg.mongodb.net/?retryWrites=true&w=majority&appName=Electric-Data-Entry";
 //const mongoURI = "mongodb://127.0.0.1:27017/yourDatabaseName"; // replace with your DB
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
