@@ -18,7 +18,8 @@ const prepSchema = new mongoose.Schema(
   {
     WBSEDCL: { type: Number, required: true },
     SOLAR: { type: Number, required: true },
-    BOILER: { type: Number, required: true },
+    BOILER_STEAM: { type: Number, required: true },
+    BOILER_UNIT: { type: Number, required: true },
   },
   { _id: false }
 );
@@ -27,7 +28,8 @@ const solventSchema = new mongoose.Schema(
   {
     WBSEDCL: { type: Number, required: true },
     SOLAR: { type: Number, required: true },
-    BOILER: { type: Number, required: true },
+    BOILER_STEAM: { type: Number, required: true },
+    BOILER_UNIT: { type: Number, required: true },
   },
   { _id: false }
 );
@@ -37,7 +39,8 @@ const refinerySchema = new mongoose.Schema(
     WBSEDCL: { type: Number, required: true },
     SOLAR: { type: Number, required: true },
     COMPRESSOR: { type: Number, required: true },
-    BOILER: { type: Number, required: true },
+    BOILER_STEAM: { type: Number, required: true },
+    BOILER_UNIT: { type: Number, required: true },
   },
   { _id: false }
 );
@@ -140,6 +143,16 @@ const compressorConsumptionSchema = new mongoose.Schema(
   { _id: false }
 );
 
+// ✅ Production
+const productionSchema = new mongoose.Schema(
+  {
+    BRAN_FEEDING: { type: Number, required: true },
+    CRUDE_CHARGE: { type: Number, required: true },
+    PADDY_FEEDING: { type: Number, required: true },
+  },
+  { _id: false }
+);
+
 // ✅ Main Electric Schema
 const electricSchema = new mongoose.Schema(
   {
@@ -165,6 +178,11 @@ const electricSchema = new mongoose.Schema(
 
     CompressorConsumption: {
       type: compressorConsumptionSchema,
+      required: true,
+    },
+
+    Production: {
+      type: productionSchema,
       required: true,
     },
   },
