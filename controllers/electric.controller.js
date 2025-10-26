@@ -459,6 +459,24 @@ export const getElectricDashboard = async (req, res) => {
         totalConsumption.SOLAR +
         totalConsumption.SOLAR_LOSS;
 
+        // --- ✅ NEW SECTION: Plant Wise Consumption ---
+      const plantWiseConsumption = {
+        PREP_SOLVENT:
+          (WBSEDCLConsumption.PREP ?? 0) +
+          (SOLARConsumption.PREP ?? 0) +
+          (WBSEDCLConsumption.SOLVENT ?? 0) +
+          (SOLARConsumption.SOLVENT ?? 0),
+        REFINERY:
+          (WBSEDCLConsumption.REFINERY ?? 0) +
+          (SOLARConsumption.REFINERY ?? 0) +
+          (COMPRESSORConsumption.REFINERY ?? 0),
+        RICE_MILL:
+          (WBSEDCLConsumption.DRYER ?? 0) +
+          (WBSEDCLConsumption.NEW_PLANT ?? 0) +
+          (WBSEDCLConsumption.OLD_PLANT ?? 0) +
+          (WBSEDCLConsumption.PULVERIZER ?? 0),
+      };
+
       // --- push result ---
       results.push({
         date: formatDate(d), // DD-MM-YYYY
@@ -467,6 +485,7 @@ export const getElectricDashboard = async (req, res) => {
         WBSEDCLConsumption,
         SOLARConsumption,
         COMPRESSORConsumption,
+        plantWiseConsumption, // ✅ Added here
       });
     }
 
