@@ -64,7 +64,8 @@ const oldPlantSchema = new mongoose.Schema(
 const dryerSchema = new mongoose.Schema(
   {
     WBSEDCL: { type: Number, required: true },
-    BOILER: { type: Number, required: true },
+    BOILER_STEAM: { type: Number, required: true },
+    BOILER_UNIT: { type: Number, required: true },
   },
   { _id: false }
 );
@@ -93,9 +94,9 @@ const plantsConsumptionSchema = new mongoose.Schema(
 const tfBoilerSchema = new mongoose.Schema(
   {
     WBSEDCL: { type: Number, required: true },
-    SOLAR: { type: Number, required: true },
-    RO: { type: Number, required: true },
+    RH: { type: Number, required: true },
     COMPRESSOR: { type: Number, required: true },
+    HUSK: { type: Number, required: true },
   },
   { _id: false }
 );
@@ -104,8 +105,12 @@ const ton12BoilerSchema = new mongoose.Schema(
   {
     WBSEDCL: { type: Number, required: true },
     SOLAR: { type: Number, required: true },
+    RH: { type: Number, required: true },
     RO: { type: Number, required: true },
     COMPRESSOR: { type: Number, required: true },
+    STEAM: { type: Number, required: true },
+    WATER: { type: Number, required: true },
+    HUSK: { type: Number, required: true },
   },
   { _id: false }
 );
@@ -113,9 +118,12 @@ const ton12BoilerSchema = new mongoose.Schema(
 const ton18BoilerSchema = new mongoose.Schema(
   {
     WBSEDCL: { type: Number, required: true },
-    SOLAR: { type: Number, required: true },
+    RH: { type: Number, required: true },
     RO: { type: Number, required: true },
     COMPRESSOR: { type: Number, required: true },
+    STEAM: { type: Number, required: true },
+    WATER: { type: Number, required: true },
+    HUSK: { type: Number, required: true },
   },
   { _id: false }
 );
@@ -134,11 +142,11 @@ const boilerConsumptionSchema = new mongoose.Schema(
 const compressorConsumptionSchema = new mongoose.Schema(
   {
     ELGI: { type: Number, required: true },
-    KAISER_1: { type: Number, required: true },
-    KAISER_2: { type: Number, required: true },
+    KAESER_1: { type: Number, required: true },
+    KAESER_2: { type: Number, required: true },
     ELGI_RH: { type: Number, required: true },
-    KAISER_1_RH: { type: Number, required: true },
-    KAISER_2_RH: { type: Number, required: true },
+    KAESER_1_RH: { type: Number, required: true },
+    KAESER_2_RH: { type: Number, required: true },
   },
   { _id: false }
 );
