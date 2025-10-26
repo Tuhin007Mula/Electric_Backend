@@ -375,10 +375,10 @@ export const getElectricDashboard = async (req, res) => {
       let COMPRESSORConsumption = {
         ELGI: 0,
         ELGI_RH: 0,
-        KAISER1: 0,
-        KAISER1_RH: 0,
-        KAISER2: 0,
-        KAISER2_RH: 0,
+        KAESER1: 0,
+        KAESER1_RH: 0,
+        KAESER2: 0,
+        KAESER2_RH: 0,
         REFINERY: 0,
         NEW_PLANT: 0,
         OLD_PLANT: 0,
@@ -421,10 +421,10 @@ export const getElectricDashboard = async (req, res) => {
         const cc = doc.CompressorConsumption || {};
         COMPRESSORConsumption.ELGI += cc.ELGI || 0;
         COMPRESSORConsumption.ELGI_RH += cc.ELGI_RH || 0;
-        COMPRESSORConsumption.KAISER1 += cc.KAISER_1 || 0;
-        COMPRESSORConsumption.KAISER1_RH += cc.KAISER_1_RH || 0;
-        COMPRESSORConsumption.KAISER2 += cc.KAISER_2 || 0;
-        COMPRESSORConsumption.KAISER2_RH += cc.KAISER_2_RH || 0;
+        COMPRESSORConsumption.KAESER1 += cc.KAESER_1 || 0;
+        COMPRESSORConsumption.KAESER1_RH += cc.KAESER_1_RH || 0;
+        COMPRESSORConsumption.KAESER2 += cc.KAESER_2 || 0;
+        COMPRESSORConsumption.KAESER2_RH += cc.KAESER_2_RH || 0;
         COMPRESSORConsumption.REFINERY += pc.Refinery?.COMPRESSOR || 0;
         COMPRESSORConsumption.NEW_PLANT += pc.NewPlant?.COMPRESSOR || 0;
         COMPRESSORConsumption.OLD_PLANT += pc.OldPlant?.COMPRESSOR || 0;
