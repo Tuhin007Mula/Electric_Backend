@@ -72,7 +72,8 @@ const dryerSchema = new mongoose.Schema(
 
 const pulverizerSchema = new mongoose.Schema(
   {
-    WBSEDCL: { type: Number, required: true },
+    WBSEDCL_MEGA: { type: Number, required: true },
+    WBSEDCL_OILS: { type: Number, required: true },
   },
   { _id: false }
 );
