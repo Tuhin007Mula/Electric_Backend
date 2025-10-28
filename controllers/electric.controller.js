@@ -491,7 +491,10 @@ export const getElectricDashboard = async (req, res) => {
         WBSEDCLConsumption.OLD_PLANT +
         WBSEDCLConsumption.BOILER +
         WBSEDCLConsumption.PULVERIZER_MEGA + 
-        WBSEDCLConsumption.PULVERIZER_OILS;
+        WBSEDCLConsumption.PULVERIZER_OILS +
+        COMPRESSORConsumption.ELGI +
+        COMPRESSORConsumption.KAESER1 +
+        COMPRESSORConsumption.KAESER2;
 
       totalConsumption.SOLAR =
         SOLARConsumption.PREP +
