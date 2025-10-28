@@ -367,7 +367,8 @@ export const getElectricDashboard = async (req, res) => {
         NEW_PLANT: 0,
         OLD_PLANT: 0,
         BOILER: 0,
-        PULVERIZER: 0,
+        PULVERIZER_MEGA: 0,
+        PULVERIZER_OILS: 0,
       };
 
       let SOLARConsumption = { PREP: 0, SOLVENT: 0, REFINERY: 0, BOILER: 0 };
@@ -414,7 +415,8 @@ export const getElectricDashboard = async (req, res) => {
           (doc.BoilerConsumption?.TF_Boiler?.WBSEDCL || 0) +
           (doc.BoilerConsumption?.TON_12_Boiler?.WBSEDCL || 0) +
           (doc.BoilerConsumption?.TON_18_Boiler?.WBSEDCL || 0);
-        WBSEDCLConsumption.PULVERIZER += pc.Pulverizer?.WBSEDCL || 0;
+        WBSEDCLConsumption.PULVERIZER_MEGA += pc.Pulverizer?.WBSEDCL_MEGA || 0;
+        WBSEDCLConsumption.PULVERIZER_OILS += pc.Pulverizer?.WBSEDCL_OILS || 0;
         plantWiseConsumption.PREP_SOLVENT += (pc.Prep?.WBSEDCL || 0) + (pc.Prep?.SOLAR || 0) + (pc.Prep?.BOILER_UNIT || 0) + (pc.Solvent?.WBSEDCL || 0) + (pc.Solvent?.SOLAR || 0) + (pc.Solvent?.BOILER_UNIT || 0);
         plantWiseConsumption.REFINERY += (pc.Refinery?.WBSEDCL || 0) + (pc.Refinery?.SOLAR || 0) + (pc.Refinery?.COMPRESSOR || 0) + (pc.Refinery?.BOILER_UNIT || 0);
         plantWiseConsumption.RICE_MILL += (pc.NewPlant?.WBSEDCL || 0) + (pc.NewPlant?.COMPRESSOR || 0) + (pc.OldPlant?.WBSEDCL || 0) + (pc.OldPlant?.COMPRESSOR || 0) + (pc.Dryer?.WBSEDCL || 0) + (pc.Dryer?.BOILER_UNIT || 0);
