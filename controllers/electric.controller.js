@@ -390,6 +390,9 @@ export const getElectricDashboard = async (req, res) => {
         PREP_SOLVENT: 0,
         REFINERY: 0,
         RICE_MILL: 0,
+        PREP_SOLVENT_PRODUCTION: 0,
+        RICE_MILL_PRODUCTION: 0,
+        REFINERY_PRODUCTION: 0,
       };
 
       // --- aggregate per doc ---
@@ -443,6 +446,11 @@ export const getElectricDashboard = async (req, res) => {
           (doc.BoilerConsumption?.TF_Boiler?.COMPRESSOR || 0) +
           (doc.BoilerConsumption?.TON_12_Boiler?.COMPRESSOR || 0) +
           (doc.BoilerConsumption?.TON_18_Boiler?.COMPRESSOR || 0);
+
+        const pd = doc.Production || {};
+        plantWiseConsumption.PREP_SOLVENT_PRODUCTION += pd.BRAN_FEEDING || 0;
+        plantWiseConsumption.RICE_MILL_PRODUCTION += pd.PADDY_FEEDING || 0;
+        plantWiseConsumption.REFINERY_PRODUCTION += pd.CRUDE_CHARGE || 0;
       }
 
       // --- total summary ---
@@ -462,8 +470,8 @@ export const getElectricDashboard = async (req, res) => {
         SOLARConsumption.REFINERY +
         SOLARConsumption.BOILER;
 
-      totalConsumption.SOLAR_LOSS =
-        powerGeneration.SOLAR - totalConsumption.SOLAR;
+      totalConsumption.SOLAR_LOSS = 0;
+        //powerGeneration.SOLAR - totalConsumption.SOLAR;
 
       totalConsumption.TOTAL =
         totalConsumption.WBSEDCL +
