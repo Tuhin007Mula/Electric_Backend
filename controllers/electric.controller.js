@@ -385,6 +385,12 @@ export const getElectricDashboard = async (req, res) => {
         BOILER: 0,
       };
 
+      let plantWiseConsumption = {
+        PREP_SOLVENT: 0,
+        REFINERY: 0,
+        RICE_MILL: 0,
+      };
+
       // --- aggregate per doc ---
       for (const doc of docs) {
         const pg = doc.PowerGeneration || {};
@@ -409,6 +415,9 @@ export const getElectricDashboard = async (req, res) => {
           (doc.BoilerConsumption?.TON_12_Boiler?.WBSEDCL || 0) +
           (doc.BoilerConsumption?.TON_18_Boiler?.WBSEDCL || 0);
         WBSEDCLConsumption.PULVERIZER += pc.Pulverizer?.WBSEDCL || 0;
+        plantWiseConsumption.PREP_SOLVENT += (pc.Prep?.WBSEDCL || 0) + (pc.Prep?.SOLAR || 0) + (pc.Prep?.BOILER_UNIT || 0) + (pc.Solvent?.WBSEDCL || 0) + (pc.Solvent?.SOLAR || 0) + (pc.Solvent?.BOILER_UNIT || 0);
+        plantWiseConsumption.REFINERY += (pc.Refinery?.WBSEDCL || 0) + (pc.Refinery?.SOLAR || 0) + (pc.Refinery?.COMPRESSOR || 0) + (pc.Refinery?.BOILER_UNIT || 0);
+        plantWiseConsumption.RICE_MILL += (pc.NewPlant?.WBSEDCL || 0) + (pc.NewPlant?.COMPRESSOR || 0) + (pc.OldPlant?.WBSEDCL || 0) + (pc.OldPlant?.COMPRESSOR || 0) + (pc.Dryer?.WBSEDCL || 0) + (pc.Dryer?.BOILER_UNIT || 0);
 
         SOLARConsumption.PREP += pc.Prep?.SOLAR || 0;
         SOLARConsumption.SOLVENT += pc.Solvent?.SOLAR || 0;
@@ -460,24 +469,24 @@ export const getElectricDashboard = async (req, res) => {
         //totalConsumption.SOLAR_LOSS;
 
         // --- ✅ NEW SECTION: Plant Wise Consumption ---
-      const plantWiseConsumption = {
-        PREP_SOLVENT:
-          (WBSEDCLConsumption.PREP ?? 0) +
-          (SOLARConsumption.PREP ?? 0) +
-          (WBSEDCLConsumption.SOLVENT ?? 0) +
-          (SOLARConsumption.SOLVENT ?? 0) + 
-          (WBSEDCLConsumption.BOILER ?? 0) +
-          (SOLARConsumption.BOILER ?? 0),
-        REFINERY:
-          (WBSEDCLConsumption.REFINERY ?? 0) +
-          (SOLARConsumption.REFINERY ?? 0) +
-          (COMPRESSORConsumption.REFINERY ?? 0),
-        RICE_MILL:
-          (WBSEDCLConsumption.DRYER ?? 0) +
-          (WBSEDCLConsumption.NEW_PLANT ?? 0) +
-          (WBSEDCLConsumption.OLD_PLANT ?? 0) +
-          (WBSEDCLConsumption.PULVERIZER ?? 0),
-      };
+      // const plantWiseConsumption = {
+      //   PREP_SOLVENT:
+      //     (WBSEDCLConsumption.PREP ?? 0) +
+      //     (SOLARConsumption.PREP ?? 0) +
+      //     (WBSEDCLConsumption.SOLVENT ?? 0) +
+      //     (SOLARConsumption.SOLVENT ?? 0) + 
+      //     (WBSEDCLConsumption.BOILER ?? 0) +
+      //     (SOLARConsumption.BOILER ?? 0),
+      //   REFINERY:
+      //     (WBSEDCLConsumption.REFINERY ?? 0) +
+      //     (SOLARConsumption.REFINERY ?? 0) +
+      //     (COMPRESSORConsumption.REFINERY ?? 0),
+      //   RICE_MILL:
+      //     (WBSEDCLConsumption.DRYER ?? 0) +
+      //     (WBSEDCLConsumption.NEW_PLANT ?? 0) +
+      //     (WBSEDCLConsumption.OLD_PLANT ?? 0) +
+      //     (WBSEDCLConsumption.PULVERIZER ?? 0),
+      // };
 
       // --- push result ---
       results.push({
