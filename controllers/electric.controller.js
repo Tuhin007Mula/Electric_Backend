@@ -395,6 +395,14 @@ export const getElectricDashboard = async (req, res) => {
         REFINERY_PRODUCTION: 0,
       };
 
+      let Ton12BoilerConsumption = {
+        UNIT: 0,
+        UNIT_RH: 0,
+        STEAM: 0,
+        WATER: 0,
+        HUSK: 0,
+      }
+
       // --- aggregate per doc ---
       for (const doc of docs) {
         const pg = doc.PowerGeneration || {};
@@ -451,6 +459,12 @@ export const getElectricDashboard = async (req, res) => {
         plantWiseConsumption.PREP_SOLVENT_PRODUCTION += pd.BRAN_FEEDING || 0;
         plantWiseConsumption.RICE_MILL_PRODUCTION += pd.PADDY_FEEDING || 0;
         plantWiseConsumption.REFINERY_PRODUCTION += pd.CRUDE_CHARGE || 0;
+
+        Ton12BoilerConsumption.UNIT += (doc.BoilerConsumption?.TON_12_Boiler?.WBSEDCL || 0) + (doc.BoilerConsumption?.TON_12_Boiler?.SOLAR || 0) + (doc.BoilerConsumption?.TON_12_Boiler?.RO || 0) + (doc.BoilerConsumption?.TON_12_Boiler?.COMPRESSOR || 0);
+        Ton12BoilerConsumption.UNIT_RH += (doc.BoilerConsumption?.TON_12_Boiler?.RH || 0);
+        Ton12BoilerConsumption.STEAM += (doc.BoilerConsumption?.TON_12_Boiler?.STEAM || 0);
+        Ton12BoilerConsumption.WATER += (doc.BoilerConsumption?.TON_12_Boiler?.WATER || 0);
+        Ton12BoilerConsumption.HUSK += (doc.BoilerConsumption?.TON_12_Boiler?.HUSK || 0);
       }
 
       // --- total summary ---
@@ -507,7 +521,8 @@ export const getElectricDashboard = async (req, res) => {
         WBSEDCLConsumption,
         SOLARConsumption,
         COMPRESSORConsumption,
-        plantWiseConsumption, // ✅ Added here
+        plantWiseConsumption,
+        Ton12BoilerConsumption, // ✅ Added here
       });
     }
 
