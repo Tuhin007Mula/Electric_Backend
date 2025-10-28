@@ -142,9 +142,12 @@ const boilerConsumptionSchema = new mongoose.Schema(
 // ✅ Compressor Consumption
 const compressorConsumptionSchema = new mongoose.Schema(
   {
-    ELGI: { type: Number, required: true },
-    KAESER_1: { type: Number, required: true },
-    KAESER_2: { type: Number, required: true },
+    ELGI_WBSEDCL: { type: Number, required: true },
+    KAESER_1_WBSEDCL: { type: Number, required: true },
+    KAESER_2_WBSEDCL: { type: Number, required: true },
+    ELGI_SOLAR: { type: Number, required: true },
+    KAESER_1_SOLAR: { type: Number, required: true },
+    KAESER_2_SOLAR: { type: Number, required: true },
     ELGI_RH: { type: Number, required: true },
     KAESER_1_RH: { type: Number, required: true },
     KAESER_2_RH: { type: Number, required: true },
