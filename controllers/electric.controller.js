@@ -456,8 +456,8 @@ export const getElectricDashboard = async (req, res) => {
 
       totalConsumption.TOTAL =
         totalConsumption.WBSEDCL +
-        totalConsumption.SOLAR +
-        totalConsumption.SOLAR_LOSS;
+        totalConsumption.SOLAR;
+        //totalConsumption.SOLAR_LOSS;
 
         // --- ✅ NEW SECTION: Plant Wise Consumption ---
       const plantWiseConsumption = {
@@ -465,7 +465,9 @@ export const getElectricDashboard = async (req, res) => {
           (WBSEDCLConsumption.PREP ?? 0) +
           (SOLARConsumption.PREP ?? 0) +
           (WBSEDCLConsumption.SOLVENT ?? 0) +
-          (SOLARConsumption.SOLVENT ?? 0),
+          (SOLARConsumption.SOLVENT ?? 0) + 
+          (WBSEDCLConsumption.BOILER ?? 0) +
+          (SOLARConsumption.BOILER ?? 0),
         REFINERY:
           (WBSEDCLConsumption.REFINERY ?? 0) +
           (SOLARConsumption.REFINERY ?? 0) +
