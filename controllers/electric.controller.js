@@ -401,7 +401,15 @@ export const getElectricDashboard = async (req, res) => {
         STEAM: 0,
         WATER: 0,
         HUSK: 0,
-      }
+      };
+
+      let Ton18BoilerConsumption = {
+        UNIT: 0,
+        UNIT_RH: 0,
+        STEAM: 0,
+        WATER: 0,
+        HUSK: 0,
+      };
 
       // --- aggregate per doc ---
       for (const doc of docs) {
@@ -465,6 +473,12 @@ export const getElectricDashboard = async (req, res) => {
         Ton12BoilerConsumption.STEAM += (doc.BoilerConsumption?.TON_12_Boiler?.STEAM || 0);
         Ton12BoilerConsumption.WATER += (doc.BoilerConsumption?.TON_12_Boiler?.WATER || 0);
         Ton12BoilerConsumption.HUSK += (doc.BoilerConsumption?.TON_12_Boiler?.HUSK || 0);
+
+        Ton18BoilerConsumption.UNIT += (doc.BoilerConsumption?.TON_18_Boiler?.WBSEDCL || 0) + (doc.BoilerConsumption?.TON_18_Boiler?.RO || 0) + (doc.BoilerConsumption?.TON_18_Boiler?.COMPRESSOR || 0);
+        Ton18BoilerConsumption.UNIT_RH += (doc.BoilerConsumption?.TON_18_Boiler?.RH || 0);
+        Ton18BoilerConsumption.STEAM += (doc.BoilerConsumption?.TON_18_Boiler?.STEAM || 0);
+        Ton18BoilerConsumption.WATER += (doc.BoilerConsumption?.TON_18_Boiler?.WATER || 0);
+        Ton18BoilerConsumption.HUSK += (doc.BoilerConsumption?.TON_18_Boiler?.HUSK || 0);
       }
 
       // --- total summary ---
@@ -493,26 +507,6 @@ export const getElectricDashboard = async (req, res) => {
         totalConsumption.SOLAR;
         //totalConsumption.SOLAR_LOSS;
 
-        // --- ✅ NEW SECTION: Plant Wise Consumption ---
-      // const plantWiseConsumption = {
-      //   PREP_SOLVENT:
-      //     (WBSEDCLConsumption.PREP ?? 0) +
-      //     (SOLARConsumption.PREP ?? 0) +
-      //     (WBSEDCLConsumption.SOLVENT ?? 0) +
-      //     (SOLARConsumption.SOLVENT ?? 0) + 
-      //     (WBSEDCLConsumption.BOILER ?? 0) +
-      //     (SOLARConsumption.BOILER ?? 0),
-      //   REFINERY:
-      //     (WBSEDCLConsumption.REFINERY ?? 0) +
-      //     (SOLARConsumption.REFINERY ?? 0) +
-      //     (COMPRESSORConsumption.REFINERY ?? 0),
-      //   RICE_MILL:
-      //     (WBSEDCLConsumption.DRYER ?? 0) +
-      //     (WBSEDCLConsumption.NEW_PLANT ?? 0) +
-      //     (WBSEDCLConsumption.OLD_PLANT ?? 0) +
-      //     (WBSEDCLConsumption.PULVERIZER ?? 0),
-      // };
-
       // --- push result ---
       results.push({
         date: formatDate(d), // DD-MM-YYYY
@@ -522,7 +516,8 @@ export const getElectricDashboard = async (req, res) => {
         SOLARConsumption,
         COMPRESSORConsumption,
         plantWiseConsumption,
-        Ton12BoilerConsumption, // ✅ Added here
+        Ton12BoilerConsumption,
+        Ton18BoilerConsumption, // ✅ Added here
       });
     }
 
