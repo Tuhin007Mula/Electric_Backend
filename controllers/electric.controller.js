@@ -375,13 +375,10 @@ export const getElectricDashboard = async (req, res) => {
 
       let COMPRESSORConsumption = {
         ELGI: 0,
-        ELGI_SOLAR: 0,
         ELGI_RH: 0,
         KAESER1: 0,
-        KAESER1_SOLAR: 0,
         KAESER1_RH: 0,
         KAESER2: 0,
-        KAESER2_SOLAR: 0,
         KAESER2_RH: 0,
         REFINERY: 0,
         NEW_PLANT: 0,
@@ -453,13 +450,10 @@ export const getElectricDashboard = async (req, res) => {
 
         const cc = doc.CompressorConsumption || {};
         COMPRESSORConsumption.ELGI += cc.ELGI || 0;
-        COMPRESSORConsumption.ELGI_SOLAR += cc.ELGI_SOLAR || 0;
         COMPRESSORConsumption.ELGI_RH += cc.ELGI_RH || 0;
         COMPRESSORConsumption.KAESER1 += cc.KAESER_1 || 0;
-        COMPRESSORConsumption.KAESER1_SOLAR += cc.KAESER_1_SOLAR || 0;
         COMPRESSORConsumption.KAESER1_RH += cc.KAESER_1_RH || 0;
         COMPRESSORConsumption.KAESER2 += cc.KAESER_2 || 0;
-        COMPRESSORConsumption.KAESER2_SOLAR += cc.KAESER_2_SOLAR || 0;
         COMPRESSORConsumption.KAESER2_RH += cc.KAESER_2_RH || 0;
         COMPRESSORConsumption.REFINERY += pc.Refinery?.COMPRESSOR || 0;
         COMPRESSORConsumption.NEW_PLANT += pc.NewPlant?.COMPRESSOR || 0;
@@ -506,10 +500,7 @@ export const getElectricDashboard = async (req, res) => {
         SOLARConsumption.PREP +
         SOLARConsumption.SOLVENT +
         SOLARConsumption.REFINERY +
-        SOLARConsumption.BOILER +
-        COMPRESSORConsumption.ELGI_SOLAR +
-        COMPRESSORConsumption.KAESER1_SOLAR +
-        COMPRESSORConsumption.KAESER2_SOLAR;
+        SOLARConsumption.BOILER;
 
       totalConsumption.SOLAR_LOSS = 0;
         //powerGeneration.SOLAR - totalConsumption.SOLAR;
