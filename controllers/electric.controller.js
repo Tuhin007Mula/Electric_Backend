@@ -452,13 +452,13 @@ export const getElectricDashboard = async (req, res) => {
           (doc.BoilerConsumption?.TON_18_Boiler?.SOLAR || 0);
 
         const cc = doc.CompressorConsumption || {};
-        COMPRESSORConsumption.ELGI += cc.ELGI_WBSEDCL || 0;
+        COMPRESSORConsumption.ELGI += cc.ELGI || 0;
         COMPRESSORConsumption.ELGI_SOLAR += cc.ELGI_SOLAR || 0;
         COMPRESSORConsumption.ELGI_RH += cc.ELGI_RH || 0;
-        COMPRESSORConsumption.KAESER1 += cc.KAESER_1_WBSEDCL || 0;
+        COMPRESSORConsumption.KAESER1 += cc.KAESER_1 || 0;
         COMPRESSORConsumption.KAESER1_SOLAR += cc.KAESER_1_SOLAR || 0;
         COMPRESSORConsumption.KAESER1_RH += cc.KAESER_1_RH || 0;
-        COMPRESSORConsumption.KAESER2 += cc.KAESER_2_WBSEDCL || 0;
+        COMPRESSORConsumption.KAESER2 += cc.KAESER_2 || 0;
         COMPRESSORConsumption.KAESER2_SOLAR += cc.KAESER_2_SOLAR || 0;
         COMPRESSORConsumption.KAESER2_RH += cc.KAESER_2_RH || 0;
         COMPRESSORConsumption.REFINERY += pc.Refinery?.COMPRESSOR || 0;
