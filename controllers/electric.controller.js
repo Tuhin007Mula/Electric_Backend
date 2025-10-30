@@ -394,8 +394,11 @@ export const getElectricDashboard = async (req, res) => {
         REFINERY: 0,
         RICE_MILL: 0,
         P_S_STEAM: 0,
+        P_S_STEAM_PRODUCTION: 0,
         R_STEAM: 0,
+        R_STEAM_PRODUCTION: 0,
         R_M_STEAM: 0,
+        R_M_STEAM_PRODUCTION: 0,
         PREP_SOLVENT_PRODUCTION: 0,
         RICE_MILL_PRODUCTION: 0,
         REFINERY_PRODUCTION: 0,
@@ -479,6 +482,9 @@ export const getElectricDashboard = async (req, res) => {
         plantWiseConsumption.PREP_SOLVENT_PRODUCTION += pd.BRAN_FEEDING || 0;
         plantWiseConsumption.RICE_MILL_PRODUCTION += pd.PADDY_FEEDING || 0;
         plantWiseConsumption.REFINERY_PRODUCTION += pd.CRUDE_CHARGE || 0;
+        plantWiseConsumption.P_S_STEAM_PRODUCTION += pd.BRAN_FEEDING || 0;
+        plantWiseConsumption.R_M_STEAM_PRODUCTION += pd.PADDY_FEEDING || 0;
+        plantWiseConsumption.R_STEAM_PRODUCTION += pd.CRUDE_CHARGE || 0;
 
         Ton12BoilerConsumption.UNIT += (doc.BoilerConsumption?.TON_12_Boiler?.WBSEDCL || 0) + (doc.BoilerConsumption?.TON_12_Boiler?.SOLAR || 0) + (doc.BoilerConsumption?.TON_12_Boiler?.RO || 0) + (doc.BoilerConsumption?.TON_12_Boiler?.COMPRESSOR || 0);
         Ton12BoilerConsumption.UNIT_RH += (doc.BoilerConsumption?.TON_12_Boiler?.RH || 0);
