@@ -445,9 +445,9 @@ export const getElectricDashboard = async (req, res) => {
         plantWiseConsumption.PREP_SOLVENT += (pc.Prep?.WBSEDCL || 0) + (pc.Prep?.SOLAR || 0) + (pc.Prep?.BOILER_UNIT || 0) + (pc.Solvent?.WBSEDCL || 0) + (pc.Solvent?.SOLAR || 0) + (pc.Solvent?.BOILER_UNIT || 0);
         plantWiseConsumption.REFINERY += (pc.Refinery?.WBSEDCL || 0) + (pc.Refinery?.SOLAR || 0) + (pc.Refinery?.COMPRESSOR || 0) + (pc.Refinery?.BOILER_UNIT || 0);
         plantWiseConsumption.RICE_MILL += (pc.NewPlant?.WBSEDCL || 0) + (pc.NewPlant?.COMPRESSOR || 0) + (pc.OldPlant?.WBSEDCL || 0) + (pc.OldPlant?.COMPRESSOR || 0) + (pc.Dryer?.WBSEDCL || 0) + (pc.Dryer?.BOILER_UNIT || 0);
-        plantWiseConsumption.PREP_SOLVENT_STEAM += (pc.Prep?.BOILER_STEAM || 0) + (pc.Solvent?.BOILER_STEAM || 0);
-        plantWiseConsumption.REFINERY_STEAM += (pc.Refinery?.BOILER_STEAM || 0);
-        plantWiseConsumption.RICE_MILL_STEAM += (pc.Dryer?.BOILER_STEAM || 0);
+        plantWiseConsumption.P_S_STEAM += (pc.Prep?.BOILER_STEAM || 0) + (pc.Solvent?.BOILER_STEAM || 0);
+        plantWiseConsumption.R_STEAM += (pc.Refinery?.BOILER_STEAM || 0);
+        plantWiseConsumption.R_M_STEAM += (pc.Dryer?.BOILER_STEAM || 0);
 
         SOLARConsumption.PREP += pc.Prep?.SOLAR || 0;
         SOLARConsumption.SOLVENT += pc.Solvent?.SOLAR || 0;
